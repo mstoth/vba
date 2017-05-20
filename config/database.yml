@@ -80,7 +80,7 @@ test:
 #
 production:
   <<: *default
-  database:postgresql-silhouetted-24750 
+  database: postgresql-silhouetted-24750 
   url: <%= ENV['DATABASE_URL'] %>
   password: <%= ENV['RUBY-GETTING-STARTED_DATABASE_PASSWORD'] %>
 #   password: <%= ENV['DATABASE_URL'] %>
