@@ -1,0 +1,54 @@
+<table class="center">
+<tr><td>
+<%= form_for(@concert) do |f| %>
+  <% if @concert.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@concert.errors.count, "error") %> prohibited this concert from being saved:</h2>
+
+      <ul>
+      <% @concert.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag 'current_date', @concert.date%>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %> <small>(The title of your concert)</small>
+  </div><br/>
+  <div class="field">
+    <%= f.label :genre %>(Classical, Jazz, etc.)<br />
+    <%= f.text_field :genre %>
+  </div><br/>
+  <div class="field">
+    <%= f.label "This is an offering " %>
+    <%= f.check_box :offer, :id=>"offer", :remote=>true %><small> (Select this if this is a concert offering.)</small>
+  </div><br/>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price, :size=>10 %><small> (You can leave this blank if you don't have a fixed price.)</small>
+  </div><br/>
+  <div id="notoffer">
+    <%= f.label :date %>&nbsp;
+	<%= text_field_tag :dateandtime, @concert.date.strftime("%m/%d/%Y %H:%M %P") %><br/>
+ <!--   <%= f.datetime_select :date %><br/><br/>   --> 
+<br/>
+<%= f.label :venue_id %>&nbsp;
+    <%= f.select :venue_id, options_from_collection_for_select(@venues,:id,:name,@concert.venue_id) %>
+  </div><br/>
+  <div class="field">
+    <%= f.label :group_id %>&nbsp;
+    <%= f.select :group_id, options_from_collection_for_select(@groups,:id,:title,@concert.group_id) %>
+  </div><br/>
+  <div class="field">
+    <%= f.label :webpage %><small> (ex. http://mywebpage.com) </small><br />
+    <%= f.text_field :webpage %> &nbsp; <%= check_box_tag "no_webpage", "false", false %>No web page for concert <br/>
+<br/><small>(This web page describes the concert.)</small>
+  </div><br/>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</td></tr>
+</table>

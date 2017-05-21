@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+<div class="form_heading"><br/><%=h @concert.title %></div>
+<br/><br/>
+<table class="center">
+	<tr>
+		<td>
+			<b>Genre:</b>
+		</td>
+		<td>
+			<%= @concert.genre %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b>Group:</b>
+		</td>
+		<td>
+  			<%= link_to Group.find(@concert.group_id).title, Group.find(@concert.group_id) %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<b>Webpage:</b>
+		</td>
+		<td>
+			<%= link_to "Concert Description",@concert.webpage %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<% if @concert.offer == false %>
+				<b>Booked at: </b>
+		</td><td>
+				<%= link_to Venue.find(@concert.venue_id).name, Venue.find(@concert.venue_id) %>
+				<br/><br/> <%= @concert.date.strftime("%A %B %d %Y, %r") %>
+			<% end %>
+		</td>
+	</tr>
+</table>
+<br/>
+<div id="footerlinks">
+<% if @can_edit %>
+<%= link_to 'Edit', edit_concert_path(@concert) %> 
+<% end %>
+</div>
+
+<div id="notes">
+	If you would like to book this concert, click on the group and you will see the contact information. 
+	</div>
