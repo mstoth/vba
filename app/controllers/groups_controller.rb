@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
   
   # GET /groups/join
   def join
-    @groups = Group.near(current_user,Bookit4pg::Application::SEARCH_RANGE)
+    @groups = Group.near(current_user,Vba::Application::SEARCH_RANGE)
     @group_list = []
     @groups.each do |g|
       if g.locked == false
@@ -112,7 +112,7 @@ class GroupsController < ApplicationController
   private
   
   def send_group_announcement(g)
-    user_list = User.near(g,Bookit4pg::Application::SEARCH_RANGE)
+    user_list = User.near(g,Vba::Application::SEARCH_RANGE)
     user_list.each do |u|
       if !u.nil? && u.notify
         UserMailer.newgroup(g,u).deliver

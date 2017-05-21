@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    @user_session = UserSession.new(params[:user_session])
+    @user_session = UserSession.new(user_params)
     if @user_session.save
       flash[:notice] = "Login successful!"
       redirect_back_or_default :home
@@ -35,5 +35,12 @@ class UserSessionsController < ApplicationController
     flash[:notice] = "Logout successful!"
     redirect_back_or_default new_user_session_url
   end
+
+  private
+
+  def user_params
+    params.require(:user_session).permit(:login, :password)
+  end
+
 
 end

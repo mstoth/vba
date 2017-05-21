@@ -24,9 +24,9 @@ class UsersController < ApplicationController
   
   def groups_near_me
     if params["distance"].nil?
-      @groups = Group.near(current_user,Bookit4pg::Application::SEARCH_RANGE)
-      @groups.sort! { |a,b| a.title <=> b.title }
-      @current_dist = Bookit4pg::Application::SEARCH_RANGE
+      @groups = Group.near(current_user,Vba::Application::SEARCH_RANGE)
+      @groups.sort { |a,b| a.title <=> b.title }
+      @current_dist = Vba::Application::SEARCH_RANGE
     else
       @groups = Group.near(current_user,params["distance"])
       @groups.sort! { |a,b| a.title <=> b.title }
@@ -36,9 +36,9 @@ class UsersController < ApplicationController
   
   def venues_near_me
     if params["distance"].nil?
-      @venues = Venue.near(current_user,Bookit4pg::Application::SEARCH_RANGE)
+      @venues = Venue.near(current_user,Vba::Application::SEARCH_RANGE)
       @venues.sort! { |a,b| a.name <=> b.name }
-      @current_dist = Bookit4pg::Application::SEARCH_RANGE
+      @current_dist = Vba::Application::SEARCH_RANGE
     else
       @venues = Venue.near(current_user,params["distance"])
       @venues.sort! { |a,b| a.name <=> b.name }
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       if @user.login[0..4]=="Guest"
         flash[:notice]="Welcome Guest"
@@ -130,4 +130,11 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:login, :email, :zip, :password, :password_confirmation, :notify)
+  end
+
 end
