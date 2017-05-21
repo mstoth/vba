@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'authlogic'
 gem 'geocoder'
 gem 'paperclip', '~>2.3'
+gem 'aws-sdk'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
