@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       @current_dist = Vba::Application::SEARCH_RANGE
     else
       @groups = Group.near(current_user,params["distance"])
-      @groups.sort! { |a,b| a.title <=> b.title }
+      @groups.sort { |a,b| a.title <=> b.title }
       @current_dist = params["distance"]
     end
   end
@@ -37,11 +37,11 @@ class UsersController < ApplicationController
   def venues_near_me
     if params["distance"].nil?
       @venues = Venue.near(current_user,Vba::Application::SEARCH_RANGE)
-      @venues.sort! { |a,b| a.name <=> b.name }
+      @venues.sort { |a,b| a.name <=> b.name }
       @current_dist = Vba::Application::SEARCH_RANGE
     else
       @venues = Venue.near(current_user,params["distance"])
-      @venues.sort! { |a,b| a.name <=> b.name }
+      @venues.sort { |a,b| a.name <=> b.name }
       @current_dist = params["distance"]
     end
   end
