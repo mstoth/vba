@@ -11,6 +11,12 @@ gem 'geocoder'
 gem 'paperclip', '~>2.3'
 gem 'aws-sdk'
 
+group :test do
+  gem 'cucumber-rails', :require => false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use sqlite3 as the database for Active Record
